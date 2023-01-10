@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2019",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "rootDirs": ["src"],
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"],
+      "@/tests/*": ["../tests/*"]
+    },
+    "forceConsistentCasingInFileNames": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "declaration": true,
+    "plugins": [
+      // Transform paths in output .js files
+      { "transform": "typescript-transform-paths" },
+      // Transform paths in output .d.ts files (Include this line if you output declarations files)
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
+  },
+  "typedocOptions": {
+    "entryPoints": ["src/index.ts"],
+    "exclude": [],
+    "out": "docs"
+  },
+  "include": ["src", "tests"],
+  "exclude": ["**/*/*.js"]
+}
