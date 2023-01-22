@@ -8,11 +8,11 @@ export class OmnicQuery {
 
   /**
    * Get Omnic crosschain message record by hash.
-   * @param {String} hash hash of the omnic message.
+   * @param {string} hash hash of the omnic message.
    * @returns {Promise<OmnicQuery.getMessageResult>}
    */
   getMessage = async (
-    hash: String): 
+    hash: string): 
     Promise<OmnicQuery.getMessageResult> => {
     const requestBody = {
       query: `{
@@ -22,6 +22,7 @@ export class OmnicQuery {
           success
           errors
           message {
+            txhash
             status
             destination
             block_number
@@ -64,15 +65,15 @@ export class OmnicQuery {
 
   /**
    * Get latest bridge message records, you can set the data query's offset and limit.
-   * @param {Number} offset 
-   * @param {Number} limit 
-   * @param {Boolean} dispatched filter the message dispatched or not.
+   * @param {number} offset 
+   * @param {number} limit 
+   * @param {boolean} dispatched filter the message dispatched or not.
    * @returns {Promise <OmnicQuery.getLatestBridgeMessageResult>}
    */
   getLatestBridgeMessage = async (
-    offset: Number, 
-    limit: Number, 
-    dispatched: Boolean
+    offset: number, 
+    limit: number, 
+    dispatched: boolean
     ): Promise <OmnicQuery.getLatestBridgeMessageResult> => {
     const requestBody = {
       query: `{
@@ -82,7 +83,9 @@ export class OmnicQuery {
           dispatched: ${dispatched}) {
           success
           errors
+          count
           message {
+            txhash
             method
             sender
             origin
@@ -163,11 +166,11 @@ export class OmnicQuery {
 
   /**
    * get Bridge Message by txhash.
-   * @param {String} txhash txhash of the message.
+   * @param {string} txhash txhash of the message.
    * @returns {Promise<OmnicQuery.getBridgeMessageResult>}
    */
   getBridgeMessage = async (
-    txhash: String
+    txhash: string
   ): 
   Promise<OmnicQuery.getBridgeMessageResult> => {
     const requestBody = {
@@ -228,67 +231,67 @@ export namespace OmnicQuery {
    * Type of Omnic message record.
    */
   export type Message = {
-    txhash: String
-    block_number: Number
-    hash: String
-    leaf_index: Number
-    raw: String
-    origin: Number
-    sender: String
-    nonce: Number
-    destination: Number
-    recipient: String
-    body: String
-    proof: String
-    status: String
-    result: String
-    dst_tx_confirm_at: Number
-    dst_tx_sent_at: Number
-    src_tx_confirm_at: Number
+    txhash: string
+    block_number: number
+    hash: string
+    leaf_index: number
+    raw: string
+    origin: number
+    sender: string
+    nonce: number
+    destination: number
+    recipient: string
+    body: string
+    proof: string
+    status: string
+    result: string
+    dst_tx_confirm_at: number
+    dst_tx_sent_at: number
+    src_tx_confirm_at: number
   }
 
   /**
    * Type of bridge message record, you can find more detailed paranic bridge transaction information here.
    */
   export type BridgeMessage = {
-    txhash: String
-    block_number: Number
-    hash: String
-    leaf_index: Number
-    raw: String
-    origin: Number
-    sender: String
-    nonce: Number
-    destination: Number
-    recipient: String
-    tx_sender: String
-    body: String
-    proof: String
-    status: String
-    result: String
-    method: Number
-    tx_recipient: String
-    src_pool_id: String
-    dst_pool_id: String
-    amount: String
-    fee: String
-    dst_tx_confirm_at: Number
-    dst_tx_sent_at: Number
-    src_tx_confirm_at: Number
-    pool_address: String
-    token_address: String
-    shared_decimals: String
-    local_decimals: String
-    name: String
-    symbol: String
+    txhash: string
+    block_number: number
+    hash: string
+    leaf_index: number
+    raw: string
+    origin: number
+    sender: string
+    nonce: number
+    destination: number
+    recipient: string
+    tx_sender: string
+    body: string
+    proof: string
+    status: string
+    result: string
+    method: number
+    tx_recipient: string
+    src_pool_id: string
+    dst_pool_id: string
+    amount: string
+    fee: string
+    dst_tx_confirm_at: number
+    dst_tx_sent_at: number
+    src_tx_confirm_at: number
+    pool_address: string
+    token_address: string
+    shared_decimals: string
+    local_decimals: string
+    name: string
+    symbol: string
   }
 
   /**
    * Type of getMessage function result.
    */
   export type getMessageResult = {
-    success: Boolean
-    errors: [String]
+    success: boolean
+    errors: [string]
     message: Message
   }
 
@@ -296,34 +299,36 @@ export namespace OmnicQuery {
    * Type of getBridgeMessage function result.
    */
   export type getBridgeMessageResult = {
-    success: Boolean
-    errors: [String]
+    success: boolean
+    errors: [string]
     message: BridgeMessage
+    count: number
   }
 
   /**
    * Type of getLatestBridgeMessage function result.
    */
   export type getLatestBridgeMessageResult = {
-    success: Boolean
-    errors: [String]
+    success: boolean
+    errors: [string]
     message: [BridgeMessage]
+    count: number
   }
 
   /**
    * Type of statistic record.
    */
   export type Statistic = {
-    total_volume: String
-    total_fee: String
+    total_volume: string
+    total_fee: string
   }
 
   /**
    * Type of getLatestBridgeMessage function result.
    */
   export type getStatisticResult = {
-    success: Boolean
-    errors: [String]
+    success: boolean
+    errors: [string]
     message: Statistic
   }
 }

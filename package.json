@@ -1,8 +1,8 @@
 {
   "name": "@rocklabs-io/omnic-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Javascript SDK for Omnic",
-  "main": "dst/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prepare": "ts-patch install -s",
     "build": "tsc --project tsconfig.build.json",

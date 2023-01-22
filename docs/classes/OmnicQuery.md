@@ -23,7 +23,7 @@ OmnicQuery class is responsible for transaction records and statistic query.
 
 ### GraphQLURL
 
-• `Private` **GraphQLURL**: `string` = `"http://127.0.0.1:5000/graphql"`
+• `Private` **GraphQLURL**: `string`
 
 ## Constructors
 
@@ -43,7 +43,7 @@ get Bridge Message by txhash.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `txhash` | `String` | txhash of the message. |
+| `txhash` | `string` | txhash of the message. |
 
 #### Returns
 
@@ -73,9 +73,9 @@ Get latest bridge message records, you can set the data query's offset and limit
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `offset` | `Number` |  |
-| `limit` | `Number` |  |
-| `dispatched` | `Boolean` | filter the message dispatched or not. |
+| `offset` | `number` |  |
+| `limit` | `number` |  |
+| `dispatched` | `boolean` | filter the message dispatched or not. |
 
 #### Returns
 
@@ -93,7 +93,7 @@ Get Omnic crosschain message record by hash.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `hash` | `String` | hash of the omnic message. |
+| `hash` | `string` | hash of the omnic message. |
 
 #### Returns
 

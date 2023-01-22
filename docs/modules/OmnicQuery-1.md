@@ -26,36 +26,36 @@ Type of bridge message record, you can find more detailed paranic bridge transac
 
 | Name | Type |
 | :------ | :------ |
-| `amount` | `String` |
-| `block_number` | `Number` |
-| `body` | `String` |
-| `destination` | `Number` |
-| `dst_pool_id` | `String` |
-| `dst_tx_confirm_at` | `Number` |
-| `dst_tx_sent_at` | `Number` |
-| `fee` | `String` |
-| `hash` | `String` |
-| `leaf_index` | `Number` |
-| `local_decimals` | `String` |
-| `method` | `Number` |
-| `name` | `String` |
-| `nonce` | `Number` |
-| `origin` | `Number` |
-| `pool_address` | `String` |
-| `proof` | `String` |
-| `raw` | `String` |
-| `recipient` | `String` |
-| `result` | `String` |
-| `sender` | `String` |
-| `shared_decimals` | `String` |
-| `src_pool_id` | `String` |
-| `src_tx_confirm_at` | `Number` |
-| `status` | `String` |
-| `symbol` | `String` |
-| `token_address` | `String` |
-| `tx_recipient` | `String` |
-| `tx_sender` | `String` |
-| `txhash` | `String` |
+| `amount` | `string` |
+| `block_number` | `number` |
+| `body` | `string` |
+| `destination` | `number` |
+| `dst_pool_id` | `string` |
+| `dst_tx_confirm_at` | `number` |
+| `dst_tx_sent_at` | `number` |
+| `fee` | `string` |
+| `hash` | `string` |
+| `leaf_index` | `number` |
+| `local_decimals` | `string` |
+| `method` | `number` |
+| `name` | `string` |
+| `nonce` | `number` |
+| `origin` | `number` |
+| `pool_address` | `string` |
+| `proof` | `string` |
+| `raw` | `string` |
+| `recipient` | `string` |
+| `result` | `string` |
+| `sender` | `string` |
+| `shared_decimals` | `string` |
+| `src_pool_id` | `string` |
+| `src_tx_confirm_at` | `number` |
+| `status` | `string` |
+| `symbol` | `string` |
+| `token_address` | `string` |
+| `tx_recipient` | `string` |
+| `tx_sender` | `string` |
+| `txhash` | `string` |
 
 ___
 
@@ -69,23 +69,23 @@ Type of Omnic message record.
 
 | Name | Type |
 | :------ | :------ |
-| `block_number` | `Number` |
-| `body` | `String` |
-| `destination` | `Number` |
-| `dst_tx_confirm_at` | `Number` |
-| `dst_tx_sent_at` | `Number` |
-| `hash` | `String` |
-| `leaf_index` | `Number` |
-| `nonce` | `Number` |
-| `origin` | `Number` |
-| `proof` | `String` |
-| `raw` | `String` |
-| `recipient` | `String` |
-| `result` | `String` |
-| `sender` | `String` |
-| `src_tx_confirm_at` | `Number` |
-| `status` | `String` |
-| `txhash` | `String` |
+| `block_number` | `number` |
+| `body` | `string` |
+| `destination` | `number` |
+| `dst_tx_confirm_at` | `number` |
+| `dst_tx_sent_at` | `number` |
+| `hash` | `string` |
+| `leaf_index` | `number` |
+| `nonce` | `number` |
+| `origin` | `number` |
+| `proof` | `string` |
+| `raw` | `string` |
+| `recipient` | `string` |
+| `result` | `string` |
+| `sender` | `string` |
+| `src_tx_confirm_at` | `number` |
+| `status` | `string` |
+| `txhash` | `string` |
 
 ___
 
@@ -99,8 +99,8 @@ Type of statistic record.
 
 | Name | Type |
 | :------ | :------ |
-| `total_fee` | `String` |
-| `total_volume` | `String` |
+| `total_fee` | `string` |
+| `total_volume` | `string` |
 
 ___
 
@@ -114,9 +114,10 @@ Type of getBridgeMessage function result.
 
 | Name | Type |
 | :------ | :------ |
-| `errors` | [`String`] |
+| `count` | `number` |
+| `errors` | [`string`] |
 | `message` | [`BridgeMessage`](OmnicQuery-1.md#bridgemessage) |
-| `success` | `Boolean` |
+| `success` | `boolean` |
 
 ___
 
@@ -130,9 +131,10 @@ Type of getLatestBridgeMessage function result.
 
 | Name | Type |
 | :------ | :------ |
-| `errors` | [`String`] |
+| `count` | `number` |
+| `errors` | [`string`] |
 | `message` | [[`BridgeMessage`](OmnicQuery-1.md#bridgemessage)] |
-| `success` | `Boolean` |
+| `success` | `boolean` |
 
 ___
 
@@ -146,9 +148,9 @@ Type of getMessage function result.
 
 | Name | Type |
 | :------ | :------ |
-| `errors` | [`String`] |
+| `errors` | [`string`] |
 | `message` | [`Message`](OmnicQuery-1.md#message) |
-| `success` | `Boolean` |
+| `success` | `boolean` |
 
 ___
 
@@ -162,6 +164,6 @@ Type of getLatestBridgeMessage function result.
 
 | Name | Type |
 | :------ | :------ |
-| `errors` | [`String`] |
+| `errors` | [`string`] |
 | `message` | [`Statistic`](OmnicQuery-1.md#statistic) |
-| `success` | `Boolean` |
+| `success` | `boolean` |

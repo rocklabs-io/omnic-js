@@ -1,4 +1,4 @@
-# @rocklabs/omnic-js
+# @rocklabs-io/omnic-js
 
 ## Table of contents
 
