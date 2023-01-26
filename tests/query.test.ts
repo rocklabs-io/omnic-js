@@ -83,4 +83,15 @@ describe('Test Query', () => {
     })
   })
   
+  test('Test getPoolsInfo function', (done) => {
+    const omnicquery = new OmnicQuery()
+    omnicquery.getPoolsInfo().then((res) => {
+
+      expect(res).toBeDefined()
+      expect(res.length).toBeGreaterThan(0)
+      done()
+    }).catch((reason)=>{
+      done('it should not reach here: ' + reason);
+    })
+  })
 })

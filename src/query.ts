@@ -1,3 +1,6 @@
+import { Actor, HttpAgent, } from '@dfinity/agent';
+import { idlFactory } from './dids/bridge.did'
+
 /**
  * OmnicQuery class is responsible for transaction records and statistic query.
  */
@@ -5,6 +8,25 @@ export class OmnicQuery {
   constructor () {}
 
   private GraphQLURL = process.env.GraphQLURL || "https://api.omnic.network/graphql"
+
+  /**
+   * Get all Paranic pools information.
+   * @returns {Promise<Array<[number, OmnicQuery.Router]>>} 
+   */
+  getPoolsInfo = async () : Promise<Array<[number, OmnicQuery.Router]>> => {
+    const agent = new HttpAgent({ host: "https://ic0.app" });
+    const actor = Actor.createActor(
+      idlFactory, {
+        agent, 
+        canisterId:  "3uldh-yyaaa-aaaam-aauiq-cai"
+      })
+    const res: any = await actor.get_routers()
+    if ('Ok' in res) {
+      return Promise.resolve(res.Ok as Array<[number, OmnicQuery.Router]>)
+    } else {
+      return Promise.reject(res.Err as string)
+    }
+  }
 
   /**
    * Get Omnic crosschain message record by hash.
@@ -330,6 +352,40 @@ export namespace OmnicQuery {
     success: boolean
     errors: [string]
     message: Statistic
+  }
+
+  /**
+   * Type of Router 
+   */
+  export interface Router {
+    'src_chain' : number,
+    'pools' : Array<[number, Pool]>,
+    'token_pool' : Array<[string, number]>,
+    'bridge_addr' : string,
+  }
+  
+  /**
+   * Type of Pool
+   */
+  export interface Pool {
+    'shared_decimals' : number,
+    'token' : Token,
+    'src_pool_id' : number,
+    'local_decimals' : number,
+    'liquidity' : bigint,
+    'src_chain' : number,
+    'convert_rate' : bigint,
+    'pool_address' : string,
+  }
+
+  /**
+   * Type of Token 
+   */
+  export interface Token {
+    'decimals' : number,
+    'name' : string,
+    'address' : string,
+    'symbol' : string,
   }
 }
 
