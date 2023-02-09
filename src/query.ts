@@ -5,7 +5,7 @@ import { idlFactory } from './dids/bridge.did'
  * OmnicQuery class is responsible for transaction records and statistic query.
  */
 export class OmnicQuery {
-  constructor () {}
+  constructor() { }
 
   private GraphQLURL = process.env.GraphQLURL || "https://api.omnic.network/graphql"
 
@@ -13,16 +13,16 @@ export class OmnicQuery {
    * Get all Paranic pools information.
    * @returns {Promise<Array<[number, OmnicQuery.Router]>>} 
    */
-  getPoolsInfo = async () : Promise<Array<[number, OmnicQuery.Router]>> => {
+  getPoolsInfo = async (): Promise<OmnicQuery.PoolsInfo> => {
     const agent = new HttpAgent({ host: "https://ic0.app" });
     const actor = Actor.createActor(
       idlFactory, {
-        agent, 
-        canisterId:  "3uldh-yyaaa-aaaam-aauiq-cai"
-      })
-    const res: any = await actor.get_routers()
+      agent,
+      canisterId: "3uldh-yyaaa-aaaam-aauiq-cai"
+    })
+    const res: any = await actor.get_all_pools()
     if ('Ok' in res) {
-      return Promise.resolve(res.Ok as Array<[number, OmnicQuery.Router]>)
+      return Promise.resolve(res.Ok as OmnicQuery.PoolsInfo)
     } else {
       return Promise.reject(res.Err as string)
     }
@@ -34,7 +34,7 @@ export class OmnicQuery {
    * @returns {Promise<OmnicQuery.getMessageResult>}
    */
   getMessage = async (
-    hash: string): 
+    hash: string):
     Promise<OmnicQuery.getMessageResult> => {
     const requestBody = {
       query: `{
@@ -75,9 +75,9 @@ export class OmnicQuery {
       },
       body: JSON.stringify(requestBody)
     };
-    const data = fetch(this.GraphQLURL, options).then(res => 
+    const data = fetch(this.GraphQLURL, options).then(res =>
       res.json().then(data => {
-        if(data.data && data.data.getMessage)
+        if (data.data && data.data.getMessage)
           return data.data.getMessage
         else
           return Promise.reject('Fail to fetch: Connection Error')
@@ -93,20 +93,20 @@ export class OmnicQuery {
    * @returns {Promise <OmnicQuery.getLatestBridgeMessageResult>}
    */
   getLatestBridgeMessage = async (
-    offset: number, 
-    limit: number, 
+    offset: number,
+    limit: number,
     dispatched: boolean
-    ): Promise <OmnicQuery.getLatestBridgeMessageResult> => {
+  ): Promise<OmnicQuery.getLatestBridgeMessageResult> => {
     const requestBody = {
       query: `{
         getLatestBridgeMessage(
-          offset: ${offset}, 
-          limit: ${limit}, 
-          dispatched: ${dispatched}) {
-          success
-          errors
-          count
-          message {
+        offset: ${offset}, 
+        limit: ${limit}, 
+        dispatched: ${dispatched}) {
+        success
+        errors
+        count
+        message {
             txhash
             method
             sender
@@ -115,22 +115,19 @@ export class OmnicQuery {
             tx_sender
             tx_recipient
             status
-            src_pool_id
             fee
             raw
-            amount
             result
+            amount
+            tx_from
+            token_addr
             src_tx_confirm_at
             dst_tx_sent_at
-            pool_address
-            token_address
-            shared_decimals
-            local_decimals
-            name
-            symbol
-          }
+            amount
+            amount_min
         }
-      }`,
+        }
+    }`,
       variables: { offset, limit, dispatched }
     };
     const options = {
@@ -140,9 +137,9 @@ export class OmnicQuery {
       },
       body: JSON.stringify(requestBody)
     };
-    const data = fetch(this.GraphQLURL, options).then(res => 
+    const data = fetch(this.GraphQLURL, options).then(res =>
       res.json().then(data => {
-        if(data.data && data.data.getLatestBridgeMessage)
+        if (data.data && data.data.getLatestBridgeMessage)
           return data.data.getLatestBridgeMessage
         else
           return Promise.reject('Fail to fetch: Connection Error')
@@ -154,8 +151,8 @@ export class OmnicQuery {
    * Get the statistic of bridge, includes fee and volume
    * @returns {Promise<OmnicQuery.getStatisticResult>}
    */
-  getBridgeStatistic = async (): 
-  Promise<OmnicQuery.getStatisticResult> => {
+  getBridgeStatistic = async ():
+    Promise<OmnicQuery.getStatisticResult> => {
     const requestBody = {
       query: `{
         getBridgeStatistic{
@@ -176,9 +173,9 @@ export class OmnicQuery {
       },
       body: JSON.stringify(requestBody)
     };
-    const data = fetch(this.GraphQLURL, options).then(res => 
+    const data = fetch(this.GraphQLURL, options).then(res =>
       res.json().then(data => {
-        if(data.data && data.data.getBridgeStatistic)
+        if (data.data && data.data.getBridgeStatistic)
           return data.data.getBridgeStatistic
         else
           return Promise.reject('Fail to fetch: Connection Error')
@@ -193,38 +190,36 @@ export class OmnicQuery {
    */
   getBridgeMessage = async (
     txhash: string
-  ): 
-  Promise<OmnicQuery.getBridgeMessageResult> => {
+  ):
+    Promise<OmnicQuery.getBridgeMessageResult> => {
     const requestBody = {
       query: `{
-      getBridgeMessage(txhash: "${txhash}")
-      {
-        success
-        errors
-        message {
-          method
-          sender
-          origin
-          destination
-          tx_sender
-          tx_recipient
-          status
-          src_pool_id
-          fee
-          raw
-          amount
-          result
-          src_tx_confirm_at
-          dst_tx_sent_at
-          pool_address
-          token_address
-          shared_decimals
-          local_decimals
-          name
-          symbol
+        getBridgeMessage(txhash: "${txhash}")
+        {
+          success
+          errors
+          message {
+              txhash
+              method
+              sender
+              origin
+              destination
+              tx_sender
+              tx_recipient
+              status
+              fee
+              raw
+              result
+              amount
+              tx_from
+              token_addr
+              src_tx_confirm_at
+              dst_tx_sent_at
+              amount
+              amount_min
+          }
         }
-      }
-    }`,
+      }`,
       // variables: { }
     };
     const options = {
@@ -234,9 +229,9 @@ export class OmnicQuery {
       },
       body: JSON.stringify(requestBody)
     };
-    const data = fetch(this.GraphQLURL, options).then(res => 
+    const data = fetch(this.GraphQLURL, options).then(res =>
       res.json().then(data => {
-        if(data.data && data.data.getBridgeMessage)
+        if (data.data && data.data.getBridgeMessage)
           return data.data.getBridgeMessage
         else
           return Promise.reject('Fail to fetch: Connection Error')
@@ -293,19 +288,13 @@ export namespace OmnicQuery {
     result: string
     method: number
     tx_recipient: string
-    src_pool_id: string
-    dst_pool_id: string
     amount: string
+    amount_min: string
     fee: string
+    token_addr: string
     dst_tx_confirm_at: number
     dst_tx_sent_at: number
     src_tx_confirm_at: number
-    pool_address: string
-    token_address: string
-    shared_decimals: string
-    local_decimals: string
-    name: string
-    symbol: string
   }
 
   /**
@@ -355,27 +344,35 @@ export namespace OmnicQuery {
   }
 
   /**
-   * Type of Router 
+   * Type of PoolsInfo 
    */
-  export interface Router {
-    'src_chain' : number,
-    'pools' : Array<[number, Pool]>,
-    'token_pool' : Array<[string, number]>,
-    'bridge_addr' : string,
+  export type PoolsInfo = {
+    'routers' : Array<[number, string]>,
+    'pools' : Array<[PoolBaseInfo, Array<[number, Token]>]>,
   }
-  
+
+  /**
+   * Type of PoolBaseInfo 
+   */
+  export type PoolBaseInfo = {
+    'name' : string,
+    'pool_id' : bigint,
+    'symbol' : string,
+  }
+
+
   /**
    * Type of Pool
    */
   export interface Pool {
-    'shared_decimals' : number,
-    'token' : Token,
-    'src_pool_id' : number,
-    'local_decimals' : number,
-    'liquidity' : bigint,
-    'src_chain' : number,
-    'convert_rate' : bigint,
-    'pool_address' : string,
+    'shared_decimals': number,
+    'token': Token,
+    'src_pool_id': number,
+    'local_decimals': number,
+    'liquidity': bigint,
+    'src_chain': number,
+    'convert_rate': bigint,
+    'pool_address': string,
   }
 
   /**
@@ -383,9 +380,9 @@ export namespace OmnicQuery {
    */
   export interface Token {
     'decimals' : number,
-    'name' : string,
+    'src_chain_id' : number,
+    'is_mapped_token' : boolean,
     'address' : string,
-    'symbol' : string,
   }
 }
 
