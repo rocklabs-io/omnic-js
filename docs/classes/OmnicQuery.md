@@ -18,6 +18,7 @@ OmnicQuery class is responsible for transaction records and statistic query.
 - [getBridgeStatistic](OmnicQuery.md#getbridgestatistic)
 - [getLatestBridgeMessage](OmnicQuery.md#getlatestbridgemessage)
 - [getMessage](OmnicQuery.md#getmessage)
+- [getPoolsInfo](OmnicQuery.md#getpoolsinfo)
 
 ## Properties
 
@@ -98,3 +99,15 @@ Get Omnic crosschain message record by hash.
 #### Returns
 
 `Promise`<[`getMessageResult`](../modules/OmnicQuery-1.md#getmessageresult)\>
+
+___
+
+### getPoolsInfo
+
+▸ **getPoolsInfo**(): `Promise`<[`PoolsInfo`](../modules/OmnicQuery-1.md#poolsinfo)\>
+
+Get all Paranic pools information.
+
+#### Returns
+
+`Promise`<[`PoolsInfo`](../modules/OmnicQuery-1.md#poolsinfo)\>

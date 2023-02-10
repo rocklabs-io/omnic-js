@@ -8,11 +8,18 @@ Type definition for the OmnicQuery.
 
 - [BridgeMessage](OmnicQuery-1.md#bridgemessage)
 - [Message](OmnicQuery-1.md#message)
+- [PoolBaseInfo](OmnicQuery-1.md#poolbaseinfo)
+- [PoolsInfo](OmnicQuery-1.md#poolsinfo)
 - [Statistic](OmnicQuery-1.md#statistic)
 - [getBridgeMessageResult](OmnicQuery-1.md#getbridgemessageresult)
 - [getLatestBridgeMessageResult](OmnicQuery-1.md#getlatestbridgemessageresult)
 - [getMessageResult](OmnicQuery-1.md#getmessageresult)
 - [getStatisticResult](OmnicQuery-1.md#getstatisticresult)
+
+### Interfaces
+
+- [Pool](../interfaces/OmnicQuery-1.Pool.md)
+- [Token](../interfaces/OmnicQuery-1.Token.md)
 
 ## Type Aliases
 
@@ -27,32 +34,26 @@ Type of bridge message record, you can find more detailed paranic bridge transac
 | Name | Type |
 | :------ | :------ |
 | `amount` | `string` |
+| `amount_min` | `string` |
 | `block_number` | `number` |
 | `body` | `string` |
 | `destination` | `number` |
-| `dst_pool_id` | `string` |
 | `dst_tx_confirm_at` | `number` |
 | `dst_tx_sent_at` | `number` |
 | `fee` | `string` |
 | `hash` | `string` |
 | `leaf_index` | `number` |
-| `local_decimals` | `string` |
 | `method` | `number` |
-| `name` | `string` |
 | `nonce` | `number` |
 | `origin` | `number` |
-| `pool_address` | `string` |
 | `proof` | `string` |
 | `raw` | `string` |
 | `recipient` | `string` |
 | `result` | `string` |
 | `sender` | `string` |
-| `shared_decimals` | `string` |
-| `src_pool_id` | `string` |
 | `src_tx_confirm_at` | `number` |
 | `status` | `string` |
-| `symbol` | `string` |
-| `token_address` | `string` |
+| `token_addr` | `string` |
 | `tx_recipient` | `string` |
 | `tx_sender` | `string` |
 | `txhash` | `string` |
@@ -86,6 +87,37 @@ Type of Omnic message record.
 | `src_tx_confirm_at` | `number` |
 | `status` | `string` |
 | `txhash` | `string` |
+
+___
+
+### PoolBaseInfo
+
+Ƭ **PoolBaseInfo**: `Object`
+
+Type of PoolBaseInfo
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `pool_id` | `bigint` |
+| `symbol` | `string` |
+
+___
+
+### PoolsInfo
+
+Ƭ **PoolsInfo**: `Object`
+
+Type of PoolsInfo
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `pools` | [[`PoolBaseInfo`](OmnicQuery-1.md#poolbaseinfo), [`number`, [`Token`](../interfaces/OmnicQuery-1.Token.md)][]][] |
+| `routers` | [`number`, `string`][] |
 
 ___
 

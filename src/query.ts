@@ -107,24 +107,33 @@ export class OmnicQuery {
         errors
         count
         message {
-            txhash
-            method
-            sender
-            origin
-            destination
-            tx_sender
-            tx_recipient
-            status
-            fee
-            raw
-            result
-            amount
-            tx_from
-            token_addr
-            src_tx_confirm_at
-            dst_tx_sent_at
-            amount
-            amount_min
+          txhash
+          block_number
+          hash
+          leaf_index
+          nonce
+          sender
+          origin
+          destination
+          recipient
+          tx_sender
+          proof
+          raw
+          body
+          status
+          result
+          fee
+          tx_from
+          method
+          tx_recipient
+          src_tx_confirm_at
+          dst_tx_sent_at
+          dst_tx_confirm_at
+          token_addr
+          src_chain_id
+          dst_chain_id
+          amount
+          amount_min
         }
         }
     }`,
@@ -199,24 +208,33 @@ export class OmnicQuery {
           success
           errors
           message {
-              txhash
-              method
-              sender
-              origin
-              destination
-              tx_sender
-              tx_recipient
-              status
-              fee
-              raw
-              result
-              amount
-              tx_from
-              token_addr
-              src_tx_confirm_at
-              dst_tx_sent_at
-              amount
-              amount_min
+            txhash
+            block_number
+            hash
+            leaf_index
+            nonce
+            sender
+            origin
+            destination
+            recipient
+            tx_sender
+            proof
+            raw
+            body
+            status
+            result
+            fee
+            tx_from
+            method
+            tx_recipient
+            src_tx_confirm_at
+            dst_tx_sent_at
+            dst_tx_confirm_at
+            token_addr
+            src_chain_id
+            dst_chain_id
+            amount
+            amount_min
           }
         }
       }`,
@@ -287,11 +305,14 @@ export namespace OmnicQuery {
     status: string
     result: string
     method: number
-    tx_recipient: string
     amount: string
     amount_min: string
     fee: string
     token_addr: string
+    tx_recipient: string
+    tx_from: string
+    src_chain_id: number
+    dst_chain_id: number
     dst_tx_confirm_at: number
     dst_tx_sent_at: number
     src_tx_confirm_at: number
