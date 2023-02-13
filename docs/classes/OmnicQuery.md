@@ -19,6 +19,7 @@ OmnicQuery class is responsible for transaction records and statistic query.
 - [getLatestBridgeMessage](OmnicQuery.md#getlatestbridgemessage)
 - [getMessage](OmnicQuery.md#getmessage)
 - [getPoolsInfo](OmnicQuery.md#getpoolsinfo)
+- [getUserTransferHistory](OmnicQuery.md#getusertransferhistory)
 
 ## Properties
 
@@ -66,7 +67,7 @@ ___
 
 ### getLatestBridgeMessage
 
-▸ **getLatestBridgeMessage**(`offset`, `limit`, `dispatched`): `Promise`<[`getLatestBridgeMessageResult`](../modules/OmnicQuery-1.md#getlatestbridgemessageresult)\>
+▸ **getLatestBridgeMessage**(`offset`, `limit`, `dispatched`): `Promise`<[`getBridgeMessagesResult`](../modules/OmnicQuery-1.md#getbridgemessagesresult)\>
 
 Get latest bridge message records, you can set the data query's offset and limit.
 
@@ -80,7 +81,7 @@ Get latest bridge message records, you can set the data query's offset and limit
 
 #### Returns
 
-`Promise`<[`getLatestBridgeMessageResult`](../modules/OmnicQuery-1.md#getlatestbridgemessageresult)\>
+`Promise`<[`getBridgeMessagesResult`](../modules/OmnicQuery-1.md#getbridgemessagesresult)\>
 
 ___
 
@@ -111,3 +112,23 @@ Get all Paranic pools information.
 #### Returns
 
 `Promise`<[`PoolsInfo`](../modules/OmnicQuery-1.md#poolsinfo)\>
+
+___
+
+### getUserTransferHistory
+
+▸ **getUserTransferHistory**(`id`, `offset`, `limit`): `Promise`<[`getBridgeMessagesResult`](../modules/OmnicQuery-1.md#getbridgemessagesresult)\>
+
+Get latest bridge message records, you can set the data query's offset and limit.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `id` | `string` | User's EVM Address or Principal ID |
+| `offset` | `number` |  |
+| `limit` | `number` |  |
+
+#### Returns
+
+`Promise`<[`getBridgeMessagesResult`](../modules/OmnicQuery-1.md#getbridgemessagesresult)\>

@@ -1,4 +1,5 @@
-import { Actor, HttpAgent, } from '@dfinity/agent';
+import { Actor, HttpAgent } from '@dfinity/agent';
+import { Principal } from '@dfinity/principal';
 import { idlFactory } from './dids/bridge.did'
 
 /**
@@ -79,9 +80,13 @@ export class OmnicQuery {
       res.json().then(data => {
         if (data.data && data.data.getMessage)
           return data.data.getMessage
-        else
-          return Promise.reject('Fail to fetch: Connection Error')
-      }))
+        else if (data.errors)
+          return Promise.reject("Failed to fetch data: " + data.errors);
+      else
+          return Promise.reject("Failed to fetch data: Connection Error");
+      })).catch((error)=>{
+        return Promise.reject('Fail to fetch: ' + error)
+      })
     return data
   }
 
@@ -90,13 +95,13 @@ export class OmnicQuery {
    * @param {number} offset 
    * @param {number} limit 
    * @param {boolean} dispatched filter the message dispatched or not.
-   * @returns {Promise <OmnicQuery.getLatestBridgeMessageResult>}
+   * @returns {Promise <OmnicQuery.getBridgeMessagesResult>}
    */
   getLatestBridgeMessage = async (
     offset: number,
     limit: number,
     dispatched: boolean
-  ): Promise<OmnicQuery.getLatestBridgeMessageResult> => {
+  ): Promise<OmnicQuery.getBridgeMessagesResult> => {
     const requestBody = {
       query: `{
         getLatestBridgeMessage(
@@ -150,9 +155,92 @@ export class OmnicQuery {
       res.json().then(data => {
         if (data.data && data.data.getLatestBridgeMessage)
           return data.data.getLatestBridgeMessage
+        else if (data.errors)
+            return Promise.reject("Failed to fetch data: " + data.errors);
         else
-          return Promise.reject('Fail to fetch: Connection Error')
-      }))
+            return Promise.reject("Failed to fetch data: Connection Error");
+      })).catch((error)=>{
+        return Promise.reject('Fail to fetch: ' + error)
+      })
+    return data
+  }
+
+  /**
+   * Get latest bridge message records, you can set the data query's offset and limit.
+   * @param {string} id User's EVM Address or Principal ID 
+   * @param {number} offset 
+   * @param {number} limit 
+   * @returns {Promise <OmnicQuery.getBridgeMessagesResult>}
+   */
+  getUserTransferHistory = async (
+    id: string,
+    offset: number,
+    limit: number,
+  ): Promise<OmnicQuery.getBridgeMessagesResult> => {
+    var _id = id.trim().toLowerCase()
+    if(!_id.startsWith('0x') && _id.length != 40){ // dfinity pid
+      _id = Principal.fromText(id).toHex().padStart(64, '0')
+    }
+    const requestBody = {
+      query: `{
+        getUserTransferHistory(
+        id: "${_id}",
+        offset: ${offset}, 
+        limit: ${limit}) {
+        success
+        errors
+        count
+        message {
+          txhash
+          block_number
+          hash
+          leaf_index
+          nonce
+          sender
+          origin
+          destination
+          recipient
+          tx_sender
+          proof
+          raw
+          body
+          status
+          result
+          fee
+          tx_from
+          method
+          tx_recipient
+          src_tx_confirm_at
+          dst_tx_sent_at
+          dst_tx_confirm_at
+          token_addr
+          src_chain_id
+          dst_chain_id
+          amount
+          amount_min
+        }
+        }
+    }`,
+      variables: { _id, offset, limit }
+    };
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(requestBody)
+    };
+    const data = fetch(this.GraphQLURL, options).then(res =>
+      res.json().then(data => {
+        if (data.data && data.data.getUserTransferHistory)
+          return data.data.getUserTransferHistory
+        else if (data.errors)
+            return Promise.reject("Failed to fetch data: " + data.errors);
+        else
+            return Promise.reject("Failed to fetch data: Connection Error");
+      })).catch((error)=>{
+        return Promise.reject('Fail to fetch: ' + error)
+      })
     return data
   }
 
@@ -186,9 +274,13 @@ export class OmnicQuery {
       res.json().then(data => {
         if (data.data && data.data.getBridgeStatistic)
           return data.data.getBridgeStatistic
+        else if (data.errors)
+            return Promise.reject("Failed to fetch data: " + data.errors);
         else
-          return Promise.reject('Fail to fetch: Connection Error')
-      }))
+            return Promise.reject("Failed to fetch data: Connection Error");
+      })).catch((error)=>{
+        return Promise.reject('Fail to fetch: ' + error)
+      })
     return data
   }
 
@@ -251,10 +343,14 @@ export class OmnicQuery {
       res.json().then(data => {
         if (data.data && data.data.getBridgeMessage)
           return data.data.getBridgeMessage
+        else if (data.errors)
+            return Promise.reject("Failed to fetch data: " + data.errors);
         else
-          return Promise.reject('Fail to fetch: Connection Error')
-      }))
-    return Promise.resolve(data)
+            return Promise.reject("Failed to fetch data: Connection Error");
+      })).catch((error)=>{
+        return Promise.reject('Fail to fetch: ' + error)
+      })
+    return data
   }
 }
 
@@ -338,9 +434,9 @@ export namespace OmnicQuery {
   }
 
   /**
-   * Type of getLatestBridgeMessage function result.
+   * Type of Bridge Messages function result.
    */
-  export type getLatestBridgeMessageResult = {
+  export type getBridgeMessagesResult = {
     success: boolean
     errors: [string]
     message: [BridgeMessage]
@@ -356,7 +452,7 @@ export namespace OmnicQuery {
   }
 
   /**
-   * Type of getLatestBridgeMessage function result.
+   * Type of getStatisticResult function result.
    */
   export type getStatisticResult = {
     success: boolean

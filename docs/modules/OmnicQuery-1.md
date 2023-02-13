@@ -12,7 +12,7 @@ Type definition for the OmnicQuery.
 - [PoolsInfo](OmnicQuery-1.md#poolsinfo)
 - [Statistic](OmnicQuery-1.md#statistic)
 - [getBridgeMessageResult](OmnicQuery-1.md#getbridgemessageresult)
-- [getLatestBridgeMessageResult](OmnicQuery-1.md#getlatestbridgemessageresult)
+- [getBridgeMessagesResult](OmnicQuery-1.md#getbridgemessagesresult)
 - [getMessageResult](OmnicQuery-1.md#getmessageresult)
 - [getStatisticResult](OmnicQuery-1.md#getstatisticresult)
 
@@ -38,6 +38,7 @@ Type of bridge message record, you can find more detailed paranic bridge transac
 | `block_number` | `number` |
 | `body` | `string` |
 | `destination` | `number` |
+| `dst_chain_id` | `number` |
 | `dst_tx_confirm_at` | `number` |
 | `dst_tx_sent_at` | `number` |
 | `fee` | `string` |
@@ -51,9 +52,11 @@ Type of bridge message record, you can find more detailed paranic bridge transac
 | `recipient` | `string` |
 | `result` | `string` |
 | `sender` | `string` |
+| `src_chain_id` | `number` |
 | `src_tx_confirm_at` | `number` |
 | `status` | `string` |
 | `token_addr` | `string` |
+| `tx_from` | `string` |
 | `tx_recipient` | `string` |
 | `tx_sender` | `string` |
 | `txhash` | `string` |
@@ -153,11 +156,11 @@ Type of getBridgeMessage function result.
 
 ___
 
-### getLatestBridgeMessageResult
+### getBridgeMessagesResult
 
-Ƭ **getLatestBridgeMessageResult**: `Object`
+Ƭ **getBridgeMessagesResult**: `Object`
 
-Type of getLatestBridgeMessage function result.
+Type of Bridge Messages function result.
 
 #### Type declaration
 
@@ -190,7 +193,7 @@ ___
 
 Ƭ **getStatisticResult**: `Object`
 
-Type of getLatestBridgeMessage function result.
+Type of getStatisticResult function result.
 
 #### Type declaration
 

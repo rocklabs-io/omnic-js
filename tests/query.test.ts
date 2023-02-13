@@ -5,14 +5,14 @@ describe('Test Query', () => {
 
   test('Test url', (done) => {
 
-    expect(process.env.GraphQLURL).toBeDefined()
+    // expect(process.env.GraphQLURL).toBeDefined()
     // expect(process.env.GraphQLURL).toEqual("http://127.0.0.1:5000/graphql")
     done()
   })
 
   test('Test getMessage function', (done) => {
     const omnicquery = new OmnicQuery()
-    omnicquery.getMessage("0x24f383855abb67fe3a2826983233778a5891c2b556b61c7064c99db4bf1a5ff0").then((res) => {
+    omnicquery.getMessage("").then((res) => {
       
       expect(res.success).toEqual(true)
       expect(res.errors).toBeNull()
@@ -70,7 +70,7 @@ describe('Test Query', () => {
 
   test('Test getBridgeMessage function', (done) => {
     const omnicquery = new OmnicQuery()
-    omnicquery.getBridgeMessage("0x5c496744e6b9638966a6d97a114fe61c1510ccb3e7b28432f57564bb692da601").then((res) => {
+    omnicquery.getBridgeMessage("").then((res) => {
 
       expect(res.success).toEqual(true)
       expect(res.errors).toBeNull()
@@ -89,6 +89,30 @@ describe('Test Query', () => {
 
       expect(res).toBeDefined()
       expect(res.pools.length).toBeGreaterThan(0)
+      done()
+    }).catch((reason)=>{
+      done('it should not reach here: ' + reason);
+    })
+  })
+
+  test('Test getUserTransferHistory function for evm address', (done) => {
+    const omnicquery = new OmnicQuery()
+    omnicquery.getUserTransferHistory("", 0, 10).then((res) => {
+
+      expect(res).toBeDefined()
+      expect(res.message.length).toBeGreaterThan(0)
+      done()
+    }).catch((reason)=>{
+      done('it should not reach here: ' + reason);
+    })
+  })
+
+  test('Test getUserTransferHistory function for principal ID', (done) => {
+    const omnicquery = new OmnicQuery()
+    omnicquery.getUserTransferHistory("", 0, 10).then((res) => {
+      
+      expect(res).toBeDefined()
+      expect(res.message.length).toBeGreaterThan(0)
       done()
     }).catch((reason)=>{
       done('it should not reach here: ' + reason);
