@@ -83,6 +83,21 @@ describe('Test Query', () => {
       done('it should not reach here: ' + reason);
     })
   })
+
+  test('Test getBridgeMessage function', (done) => {
+    const omnicquery = new OmnicQuery()
+    omnicquery.getBridgeMessage("4").then((res) => {
+
+      expect(res.success).toEqual(true)
+      expect(res.errors).toBeNull()
+      expect(res.message).toBeDefined()
+      expect(res.message.method).toBeDefined()
+      expect(res.message.amount).toBeDefined()
+      done()
+    }).catch((reason)=>{
+      done('it should not reach here: ' + reason);
+    })
+  })
   
   test('Test getPoolsInfo function', (done) => {
     const omnicquery = new OmnicQuery()

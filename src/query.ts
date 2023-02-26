@@ -210,6 +210,7 @@ export class OmnicQuery {
           src_tx_confirm_at
           dst_tx_sent_at
           dst_tx_confirm_at
+          timestamp
           token_addr
           src_chain_id
           dst_chain_id
@@ -331,6 +332,7 @@ export class OmnicQuery {
             src_tx_confirm_at
             dst_tx_sent_at
             dst_tx_confirm_at
+            timestamp
             token_addr
             src_chain_id
             dst_chain_id
@@ -421,6 +423,7 @@ export namespace OmnicQuery {
     dst_tx_confirm_at: number
     dst_tx_sent_at: number
     src_tx_confirm_at: number
+    timestamp: string
   }
 
   /**

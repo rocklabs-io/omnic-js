@@ -76,6 +76,7 @@ Type of bridge message record, you can find more detailed paranic bridge transac
 | `src_chain_id` | `number` |
 | `src_tx_confirm_at` | `number` |
 | `status` | `string` |
+| `timestamp` | `string` |
 | `token_addr` | `string` |
 | `tx_from` | `string` |
 | `tx_recipient` | `string` |
