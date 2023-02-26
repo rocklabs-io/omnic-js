@@ -6,7 +6,9 @@ Type definition for the OmnicQuery.
 
 ### Type Aliases
 
+- [Amount](OmnicQuery-1.md#amount)
 - [BridgeMessage](OmnicQuery-1.md#bridgemessage)
+- [Fee](OmnicQuery-1.md#fee)
 - [Message](OmnicQuery-1.md#message)
 - [PoolBaseInfo](OmnicQuery-1.md#poolbaseinfo)
 - [PoolsInfo](OmnicQuery-1.md#poolsinfo)
@@ -22,6 +24,25 @@ Type definition for the OmnicQuery.
 - [Token](../interfaces/OmnicQuery-1.Token.md)
 
 ## Type Aliases
+
+### Amount
+
+Ƭ **Amount**: `Object`
+
+Type of Amount record
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `amount` | `string` |
+| `decimals` | `number` |
+| `name` | `string` |
+| `symbol` | `string` |
+| `token_addr` | `string` |
+| `token_id` | `number` |
+
+___
 
 ### BridgeMessage
 
@@ -60,6 +81,23 @@ Type of bridge message record, you can find more detailed paranic bridge transac
 | `tx_recipient` | `string` |
 | `tx_sender` | `string` |
 | `txhash` | `string` |
+
+___
+
+### Fee
+
+Ƭ **Fee**: `Object`
+
+Type of Fee record
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `chain_id` | `number` |
+| `decimals` | `number` |
+| `fee` | `string` |
+| `symbol` | `string` |
 
 ___
 
@@ -120,7 +158,7 @@ Type of PoolsInfo
 | Name | Type |
 | :------ | :------ |
 | `pools` | [[`PoolBaseInfo`](OmnicQuery-1.md#poolbaseinfo), [`number`, [`Token`](../interfaces/OmnicQuery-1.Token.md)][]][] |
-| `routers` | [`number`, `string`][] |
+| `router` | [`number`, `string`][] |
 
 ___
 
@@ -134,8 +172,8 @@ Type of statistic record.
 
 | Name | Type |
 | :------ | :------ |
-| `total_fee` | `string` |
-| `total_volume` | `string` |
+| `amounts` | [[`Amount`](OmnicQuery-1.md#amount)] |
+| `fees` | [[`Fee`](OmnicQuery-1.md#fee)] |
 
 ___
 
