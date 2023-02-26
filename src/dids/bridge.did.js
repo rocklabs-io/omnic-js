@@ -23,7 +23,7 @@ export const idlFactory = ({ IDL }) => {
     'symbol' : IDL.Text,
   });
   const PoolsInfo = IDL.Record({
-    'routers' : IDL.Vec(IDL.Tuple(IDL.Nat32, IDL.Text)),
+    'router' : IDL.Vec(IDL.Tuple(IDL.Nat32, IDL.Text)),
     'pools' : IDL.Vec(
       IDL.Tuple(PoolBaseInfo, IDL.Vec(IDL.Tuple(IDL.Nat32, Token)))
     ),

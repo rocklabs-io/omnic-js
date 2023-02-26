@@ -113,7 +113,6 @@ export class OmnicQuery {
         count
         message {
           txhash
-          block_number
           hash
           leaf_index
           nonce
@@ -131,9 +130,7 @@ export class OmnicQuery {
           tx_from
           method
           tx_recipient
-          src_tx_confirm_at
-          dst_tx_sent_at
-          dst_tx_confirm_at
+          timestamp
           token_addr
           src_chain_id
           dst_chain_id
@@ -255,9 +252,21 @@ export class OmnicQuery {
         getBridgeStatistic{
           success
           errors
-          message {
-            total_fee
-            total_volume
+          message{
+            amounts{
+              token_id
+              name
+              decimals
+              token_addr
+              symbol
+              amount
+            }
+            fees{
+              chain_id
+              decimals
+              symbol
+              fee
+            }
           }
         }
       }`,
@@ -444,11 +453,33 @@ export namespace OmnicQuery {
   }
 
   /**
+   * Type of Fee record
+   */
+  export type Fee = {
+    chain_id: number
+    decimals: number
+    symbol: string
+    fee: string
+  }
+
+  /**
+   * Type of Amount record
+   */
+  export type Amount = {
+    token_id: number
+    name: string
+    decimals: number
+    token_addr: string
+    symbol: string
+    amount: string
+  }
+
+  /**
    * Type of statistic record.
    */
   export type Statistic = {
-    total_volume: string
-    total_fee: string
+    fees: [Fee]
+    amounts: [Amount]
   }
 
   /**
@@ -464,7 +495,7 @@ export namespace OmnicQuery {
    * Type of PoolsInfo 
    */
   export type PoolsInfo = {
-    'routers' : Array<[number, string]>,
+    'router' : Array<[number, string]>,
     'pools' : Array<[PoolBaseInfo, Array<[number, Token]>]>,
   }
 

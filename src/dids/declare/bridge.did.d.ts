@@ -26,7 +26,7 @@ export interface PoolBaseInfo {
   'symbol' : string,
 }
 export interface PoolsInfo {
-  'routers' : Array<[number, string]>,
+  'router' : Array<[number, string]>,
   'pools' : Array<[PoolBaseInfo, Array<[number, Token]>]>,
 }
 export type Result = { 'Ok' : boolean } |
